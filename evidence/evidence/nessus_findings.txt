@@ -1,0 +1,111 @@
+Windows XP Vulnerability Assessment - Nessus Findings
+
+Scanner:
+Nessus Essentials
+
+Target:
+192.168.1.23
+
+Scan Type:
+Basic Network Scan
+
+=====================================================
+Executive Summary
+=================
+
+A vulnerability assessment was performed against a Windows XP virtual machine to identify security weaknesses and assess risk exposure.
+
+=====================================================
+Critical Findings
+=================
+
+1. Unsupported Operating System
+
+Severity: Critical
+
+Description:
+Windows XP has reached End-of-Life and no longer receives security updates from Microsoft.
+
+Impact:
+
+* Increased risk of compromise
+* No vendor support
+* Exposure to known vulnerabilities
+
+Recommendation:
+Migrate to a supported operating system.
+
+=====================================================
+High Findings
+=============
+
+1. SMB Service Exposure
+
+Severity: High
+
+Description:
+SMB service exposed over TCP port 445.
+
+Impact:
+Potential target for remote attacks and lateral movement.
+
+Recommendation:
+Restrict SMB access and apply network segmentation.
+
+---
+
+2. SMBv1 Enabled
+
+Severity: High
+
+Description:
+Legacy SMBv1 protocol detected.
+
+Impact:
+Known attack vector used by multiple malware families and worms.
+
+Recommendation:
+Disable SMBv1 and migrate to newer SMB versions.
+
+=====================================================
+Medium Findings
+===============
+
+1. NetBIOS Exposure
+
+Severity: Medium
+
+Description:
+NetBIOS service exposed over TCP port 139.
+
+Impact:
+Host information disclosure.
+
+Recommendation:
+Disable NetBIOS if not required.
+
+---
+
+2. Information Disclosure
+
+Severity: Medium
+
+Description:
+Host name and workgroup information disclosed through SMB enumeration.
+
+Recommendation:
+Reduce unnecessary service exposure.
+
+=====================================================
+Remediation Validation
+======================
+
+Implemented:
+
+* Disabled NetBIOS
+* Enabled Windows Firewall
+* Disabled unnecessary services
+* Reduced network exposure
+
+Result:
+Attack surface reduced and security posture improved.
