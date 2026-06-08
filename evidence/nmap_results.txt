@@ -1,0 +1,99 @@
+Windows XP Vulnerability Assessment - Nmap Evidence
+
+Target IP: 192.168.1.23
+
+=====================================================
+Host Discovery
+==============
+
+Command:
+nmap -sn 192.168.1.0/24
+
+Finding:
+Host discovered at 192.168.1.23
+
+=====================================================
+Port Scan
+=========
+
+Command:
+nmap -sS -Pn 192.168.1.23
+
+Results:
+
+PORT    STATE SERVICE
+135/tcp open  msrpc
+139/tcp open  netbios-ssn
+445/tcp open  microsoft-ds
+
+Observation:
+SMB and NetBIOS services exposed.
+
+=====================================================
+Service Enumeration
+===================
+
+Command:
+nmap -sV -O 192.168.1.23
+
+Results:
+
+135/tcp open  msrpc        Microsoft Windows RPC
+139/tcp open  netbios-ssn  Microsoft Windows netbios-ssn
+445/tcp open  microsoft-ds Microsoft Windows XP microsoft-ds
+
+Operating System:
+Microsoft Windows XP SP2/SP3
+
+Observation:
+Target identified as Windows XP, an unsupported legacy operating system.
+
+=====================================================
+SMB OS Discovery
+================
+
+Command:
+nmap --script smb-os-discovery 192.168.1.23
+
+Results:
+
+OS: Windows XP
+Computer Name: vaishak-b57c190
+Workgroup: WORKGROUP
+
+Observation:
+SMB information disclosure identified.
+
+=====================================================
+SMB Protocol Enumeration
+========================
+
+Command:
+nmap --script smb-protocols 192.168.1.23
+
+Results:
+
+NT LM 0.12 (SMBv1)
+
+Observation:
+SMBv1 protocol enabled.
+
+Risk:
+Legacy protocol vulnerable to numerous historical attacks.
+
+=====================================================
+Post-Hardening Validation
+=========================
+
+Actions Performed:
+
+* NetBIOS disabled
+* Windows Firewall enabled
+* Unnecessary services disabled
+
+Validation:
+
+Subsequent scans showed reduced host visibility and network exposure.
+
+Conclusion:
+Hardening measures successfully reduced the attack surface of the target system.
